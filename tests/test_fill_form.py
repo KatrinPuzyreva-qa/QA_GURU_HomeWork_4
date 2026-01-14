@@ -29,7 +29,7 @@ def test_fill_form():
     browser.element('[for="hobbies-checkbox-3"]').click()  # Music
 
     # Загружаем файл аватара
-    browser.element('#uploadPicture').set_value('avatarka.jpg')  # Путь к файлу
+    browser.element('#uploadPicture').set_value('cat.jpg')  # Путь к файлу
 
     # Проверяем адрес проживания
     browser.element('#currentAddress').type('Москва, ул. Ленина, д. 1')
