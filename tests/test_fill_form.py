@@ -1,9 +1,12 @@
+import os
 from selene import browser, have
 
 
 def test_fill_form():
     # Открываем страницу
     browser.open('https://demoqa.com/automation-practice-form')
+    browser.driver.execute_script("$('#fixedban').remove()")
+    browser.driver.execute_script("$('footer').remove()")
 
     # Вводим имя и фамилию
     browser.element('#firstName').type('Таисия')
@@ -19,7 +22,24 @@ def test_fill_form():
     browser.element('#userNumber').type('89991234567')
 
     # Выбираем дату рождения
-    browser.element('#dateOfBirthInput').send_keys('1990-01-01')
+    browser.element('#dateOfBirthInput').click()
+
+    # Выбираем год
+    browser.element('.react-datepicker__year-select').click()
+    browser.element('.react-datepicker__year-select') \
+        .all('option') \
+        .element_by(have.text('1990')) \
+        .click()
+
+    # Выбираем месяц
+    browser.element('.react-datepicker__month-select').click()
+    browser.element('.react-datepicker__month-select') \
+        .all('option') \
+        .element_by(have.text('March')) \
+        .click()
+
+    # Выбираем день
+    browser.element('.react-datepicker__day--010').click()
 
     # 6. Вводим subject
     browser.element('#subjectsInput').type('Commerce')
@@ -29,13 +49,34 @@ def test_fill_form():
     browser.element('[for="hobbies-checkbox-3"]').click()  # Music
 
     # Загружаем файл аватара
-    browser.element('#uploadPicture').set_value('cat.jpg')  # Путь к файлу
+    browser.element('#uploadPicture').set_value(os.path.abspath('cat.jpg'))  # Путь к файлу
 
     # Проверяем адрес проживания
     browser.element('#currentAddress').type('Москва, ул. Ленина, д. 1')
+
+    # 10. Выбираем штат
+    browser.element('#react-select-3-input').type('Haryana')
+    browser.element('[id^="react-select-3-option-"]').click()
+
+    # 11. Выбираем город
+    browser.element('#react-select-4-input').type('Karnal')
+    browser.element('[id^="react-select-4-option-"]').click()
 
     # Отправляем форму
     browser.element('#submit').click()
 
     # Проверяем успешную отправку
     browser.element('.modal-content').should(have.text('Thanks for submitting the form'))
+
+    # Проверяем заполненные поля в модальном окне
+    browser.element('.table-responsive').should(have.text('Таисия Повали'))
+    browser.element('.table-responsive').should(have.text('user@mail.ru'))
+    browser.element('.table-responsive').should(have.text('Female'))
+    browser.element('.table-responsive').should(have.text('89991234567'))
+    browser.element('.table-responsive').should(have.text('10 March,1990'))
+    browser.element('.table-responsive').should(have.text('Commerce'))
+    browser.element('.table-responsive').should(have.text('Music'))
+    browser.element('.table-responsive').should(have.text('cat.jpg'))
+    browser.element('.table-responsive').should(have.text('Москва, ул. Ленина, д. 1'))
+    browser.element('.table-responsive').should(have.text('Haryana Karnal'))
+
