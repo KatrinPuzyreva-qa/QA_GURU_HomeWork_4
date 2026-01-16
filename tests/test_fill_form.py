@@ -1,4 +1,5 @@
 import os
+
 from selene import browser, have
 
 
@@ -7,6 +8,7 @@ def test_fill_form():
     browser.open('https://demoqa.com/automation-practice-form')
     browser.driver.execute_script("$('#fixedban').remove()")
     browser.driver.execute_script("$('footer').remove()")
+
 
     # Вводим имя и фамилию
     browser.element('#firstName').type('Таисия')
@@ -41,7 +43,7 @@ def test_fill_form():
     # Выбираем день
     browser.element('.react-datepicker__day--010').click()
 
-    # 6. Вводим subject
+    # Вводим subject
     browser.element('#subjectsInput').type('Commerce')
     browser.element('.subjects-auto-complete__menu').element('div').click()
 
@@ -54,11 +56,11 @@ def test_fill_form():
     # Проверяем адрес проживания
     browser.element('#currentAddress').type('Москва, ул. Ленина, д. 1')
 
-    # 10. Выбираем штат
+    # Выбираем штат
     browser.element('#react-select-3-input').type('Haryana')
     browser.element('[id^="react-select-3-option-"]').click()
 
-    # 11. Выбираем город
+    # Выбираем город
     browser.element('#react-select-4-input').type('Karnal')
     browser.element('[id^="react-select-4-option-"]').click()
 
