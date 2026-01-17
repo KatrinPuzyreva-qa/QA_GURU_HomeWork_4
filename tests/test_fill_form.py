@@ -18,10 +18,10 @@ def test_fill_form():
     browser.element('#userEmail').type('user@mail.ru')
 
     # Выбираем пол
-    browser.element('[for="gender-radio-1"]').click()
+    browser.element('[for="gender-radio-2"]').click()
 
     # Вводим номер телефона
-    browser.element('#userNumber').type('89991234567')
+    browser.element('#userNumber').type('9991234567')
 
     # Выбираем дату рождения
     browser.element('#dateOfBirthInput').click()
@@ -74,7 +74,7 @@ def test_fill_form():
     browser.element('.table-responsive').should(have.text('Таисия Повали'))
     browser.element('.table-responsive').should(have.text('user@mail.ru'))
     browser.element('.table-responsive').should(have.text('Female'))
-    browser.element('.table-responsive').should(have.text('89991234567'))
+    browser.element('.table-responsive').should(have.text('9991234567'))
     browser.element('.table-responsive').should(have.text('10 March,1990'))
     browser.element('.table-responsive').should(have.text('Commerce'))
     browser.element('.table-responsive').should(have.text('Music'))
